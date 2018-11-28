@@ -36,4 +36,3 @@ serialport.on('open', function()
 		io.emit("currentStory");
 	});
 });
-}
