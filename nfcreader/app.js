@@ -7,17 +7,15 @@ const NFCport = new SerialPort('COM8', function (err) {
 
 });
 
-NFCport.on('open', function (data) {
-  console.log('currentStory', data);
-  socket.emit('currentStory', data);
+NFCport.on('data', function (data) {
+  console.log('data', data);
+  socket.emit('data', data);
 });
 
-const Readline = require('@serialport/parser-readline')
-const parser = port.pipe(new Readline({ delimiter: '\n' }))
+const Readline = require('@serialport/parser-readline');
+const parser = NFCport.pipe(new Readline({ delimiter: '\n' }));
 NFCport.pipe(parser);
-parser.on('data', function (data) {
-  console.log('Timestream data received' + data);
-});
+parser.on('data', console.log('Timestream data received' + data));
 
 var express = require('express');
 var app = express();
