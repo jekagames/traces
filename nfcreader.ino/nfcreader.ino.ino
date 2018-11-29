@@ -121,7 +121,7 @@ if (currentCardID == "17938683") {
       Serial.println("Our systems can't seem to analyze this trace.");
       currentStory = "Our systems can't seem to analyze this trace.";
     }
-    delay(1000);
+    delay(800);
 }
 
 
