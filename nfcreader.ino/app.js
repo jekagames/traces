@@ -14,9 +14,6 @@ app.get('/', function(req, res)
 	res.sendFile(__dirname + '/index.html');
 });
 
-// app.use(express.static(__dirname + '/node_modules/createjs-soundjs/lib'));
-// app.use(express.static(__dirname + '/sfx'));
-
 io.on('connection', function(socket)
 {
 	console.log("Connecting to spacetime continuum...");
