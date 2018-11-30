@@ -1,21 +1,25 @@
+var currentStory = "Story 0";
 const SerialPort = require('serialport');
-const NFCport = new SerialPort('COM8', function (err) {
-  baudrate: 115200;
-  if (err) {
-    return console.log('Error: ', err.message)
+const NFCport = new SerialPort('COM8', {
+  baudRate: 115200
   }
-
-});
+);
 
 NFCport.on('data', function (data) {
-  console.log('data', data);
+  //console.log(data);
   socket.emit('data', data);
 });
 
 const Readline = require('@serialport/parser-readline');
 const parser = NFCport.pipe(new Readline({ delimiter: '\n' }));
 NFCport.pipe(parser);
-parser.on('data', console.log('Timestream data received' + data));
+//console.log(NFCport);
+parser.on('data', function (data) {
+	console.log("Analyzing traces...");
+  //console.log(data);
+  currentStory = data;
+  console.log(currentStory);
+});
 
 var express = require('express');
 var app = express();

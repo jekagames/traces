@@ -11,7 +11,7 @@
 
 int cardid = 0;
 String currentCardID = String(cardid);
-String currentStory = "story0";
+//String currentStory = "story0";
 
 
 // If using the breakout with SPI, define the pins for SPI communication.
@@ -73,7 +73,7 @@ void loop() {
   if (success) {
     // Display some basic information about the card
     Serial.println("Found a trace...");
-    Serial.print("  UID Length: ");Serial.print(uidLength, DEC);Serial.println(" bytes");
+    //Serial.print("  UID Length: ");Serial.print(uidLength, DEC);Serial.println(" bytes");
     Serial.print("  UID Value: ");
     nfc.PrintHex(uid, uidLength);
     
@@ -95,31 +95,37 @@ void loop() {
     }
     Serial.println("Analyzing trace further...");
     Serial.println("");
-      delay(500);
+      delay(1000);
   }
 
 
 if (currentCardID == "17938683") {
   Serial.println("Story 1");
-  currentStory = "story 1";
+  //currentStory = "story 1";
+  delay(800);
 }  else if (currentCardID == "1635431931") {
     Serial.println("Story 2");
-    currentStory = "story 2";
+    //currentStory = "story 2";
+    delay(800);
     }  else if (currentCardID == "285915387") {
     Serial.println("Story 3");
-    currentStory = "story 3";
+    //currentStory = "story 3";
+    delay(800);
     }  else if (currentCardID == "4051744763") {
     Serial.println("Story 4");
-    currentStory = "story 4";
+    //currentStory = "story 4";
+    delay(800);
     }  else if (currentCardID == "2446767611") {
     Serial.println("Story 5");
-    currentStory = "story 5";
+    //currentStory = "story 5";
+    delay(800);
     }  else if (currentCardID == "107222141") {
     Serial.println("Story 6");
-    currentStory = "story 6";
+    //currentStory = "story 6";
+    delay(800);
   }    else {
       Serial.println("Our systems can't seem to analyze this trace.");
-      currentStory = "Our systems can't seem to analyze this trace.";
+      //currentStory = "Our systems can't seem to analyze this trace.";
     }
     delay(800);
 }
