@@ -15,7 +15,7 @@ const parser = NFCport.pipe(new Readline({ delimiter: '\n' }));
 NFCport.pipe(parser);
 //console.log(NFCport);
 parser.on('data', function (data) {
-	console.log("Analyzing traces...");
+	//console.log("Analyzing traces...");
   //console.log(data);
   currentStory = data;
   console.log(currentStory);
