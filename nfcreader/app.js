@@ -19,12 +19,21 @@ parser.on('data', function (data) {
   //console.log(data);
   currentStory = data;
   console.log(currentStory);
+  console.log("");
 });
 
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
+
+app.get('/', function(req, res)
+{
+	res.sendFile(__dirname + '/index.html');
+});
+
+app.use(express.static(__dirname + '/libraries/soundjs.min.js'));
+app.use(express.static(__dirname + '/assets'));
 
 socket.on('connection', function(socket)
 {
