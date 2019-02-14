@@ -1,6 +1,8 @@
 var currentStory = "Story 0";
 const SerialPort = require('serialport');
-const NFCport = new SerialPort('COM8', {
+//COM PORT has to be read and changed accordingly in windows from the Arduino IDE. Maybe there's a way to make the code auto-select the correct port? 
+//Or maybe this will just be easier in Linux
+const NFCport = new SerialPort('COM7', {
   baudRate: 115200
   }
 );
