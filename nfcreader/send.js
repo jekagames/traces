@@ -9,7 +9,8 @@ const NFCport = new SerialPort('COM7', {
 
 NFCport.on('data', function (data) {
   //console.log(data);
-  socket.emit('data', data);
+  //socket.emit('data', data);
+  socket.emit('data', currentStory);
 });
 
 const Readline = require('@serialport/parser-readline');
@@ -21,7 +22,7 @@ parser.on('data', function (data) {
   //console.log(data);
   currentStory = data;
   console.log(currentStory);
-  console.log("");
+  //console.log("");
 });
 
 var express = require('express');
@@ -34,7 +35,10 @@ app.get('/', function(req, res)
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.use(express.static(__dirname + '/libraries/soundjs.min.js'));
+//This should also send to a second serial port to display the text. Could possibly do without serial port. 
+
+app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/libraries'));
 app.use(express.static(__dirname + '/assets'));
 
 socket.on('connection', function(socket)
@@ -46,4 +50,6 @@ http.listen(8080, function()
 {
 	console.log('Open localhost:8080 in your web browser!');
 });
+
+
 
