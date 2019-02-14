@@ -14,7 +14,8 @@ NFCport.on('data', function (data) {
 });
 
 const Readline = require('@serialport/parser-readline');
-const parser = NFCport.pipe(new Readline({ delimiter: '\n' }));
+const parser = NFCport.pipe(new Readline());
+//{ delimiter: '\n' } -- was in Readline for readability
 NFCport.pipe(parser);
 //console.log(NFCport);
 parser.on('data', function (data) {
