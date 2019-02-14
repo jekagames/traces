@@ -1,4 +1,5 @@
-#include <Servo.h>
+char test;
+
 #include <Boards.h>
 #include <Firmata.h>
 #include <FirmataConstants.h>
@@ -33,7 +34,7 @@ Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 #if defined(ARDUINO_ARCH_SAMD)
 // for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
 // also change #define in Adafruit_PN532.cpp library file
-#define Serial SerialUSB
+//#define Serial SerialUSB
 #endif
 
 void setup() {
@@ -129,5 +130,6 @@ if (currentCardID == "17938683") {
     }
     delay(800);
 }
+
 
 
