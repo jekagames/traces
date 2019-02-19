@@ -1,5 +1,6 @@
 //char test;
 
+#include <LiquidCrystal.h>
 #include <Boards.h>
 #include <Firmata.h>
 #include <FirmataConstants.h>
@@ -13,7 +14,9 @@
 int cardid = 0;
 String currentCardID = String(cardid);
 //String currentStory = "story0";
-
+//LCD INFO (Pins and associations)
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 // If using the breakout with SPI, define the pins for SPI communication.
 #define PN532_SCK  (2)
@@ -39,9 +42,13 @@ Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 
 void setup() {
 
+ // set up the LCD's number of columns and rows:
+
+  // initialize the serial communications:
   Serial.begin(115200);
   Serial.println("Hello!");
-  
+
+  lcd.begin(20, 4);
   nfc.begin();
 
   uint32_t versiondata = nfc.getFirmwareVersion();
@@ -94,42 +101,45 @@ void loop() {
       //Serial.println(cardid);
       currentCardID = cardid;
       //Serial.println("Trace " + currentCardID + " found.");
+      Serial.println(currentCardID);
+      lcd.print(currentCardID);
     }
     //Serial.println("Analyzing trace further...");
     //Serial.println("");
       //delay(1000);
   }
+  }
 
 
-if (currentCardID == "17938683") {
-  Serial.println("Story 1");
+//if (currentCardID == "17938683") {
+  //Serial.println("Story 1");
   //currentStory = "story 1";
   //delay(800);
-}  else if (currentCardID == "1635431931") {
-    Serial.println("Story 2");
+//}  else if (currentCardID == "1635431931") {
+    //Serial.println("Story 2");
     //currentStory = "story 2";
    //delay(800);
-    }  else if (currentCardID == "285915387") {
-    Serial.println("Story 3");
+   // }  else if (currentCardID == "285915387") {
+    //Serial.println("Story 3");
     //currentStory = "story 3";
     //delay(800);
-    }  else if (currentCardID == "4051744763") {
-    Serial.println("Story 4");
+    //}  else if (currentCardID == "4051744763") {
+    //Serial.println("Story 4");
     //currentStory = "story 4";
     //delay(800);
-    }  else if (currentCardID == "2446767611") {
-    Serial.println("Story 5");
+    //}  else if (currentCardID == "2446767611") {
+    //Serial.println("Story 5");
     //currentStory = "story 5";
     //delay(800);
-    }  else if (currentCardID == "107222141") {
-    Serial.println("Story 6");
+   // }  else if (currentCardID == "107222141") {
+    //Serial.println("Story 6");
     //currentStory = "story 6";
     //delay(800);
-  }    else {
-      Serial.println("Our systems can't seem to analyze this trace.");
+  //}    else {
+      //Serial.println("Our systems can't seem to analyze this trace.");
       //currentStory = "Our systems can't seem to analyze this trace.";
-    }
+   // }
     //delay(800);
-}
+//}
 
 

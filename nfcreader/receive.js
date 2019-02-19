@@ -22,12 +22,12 @@ var socket = io();
 			createjs.Sound.registerSound("log002.ogg", "log002");
 
 function storyTeller() {
-if (receivedStory == "Story 1") 
+if (receivedStory == "story001") 
 {
 //play sound log001
 soundInstance = createjs.Sound.play("log001");
 }
-else if (receivedStory == "Story 2")
+else if (receivedStory == "story002")
 {
 	//play sound log002
 soundInstance = createjs.Sound.play("log002");
