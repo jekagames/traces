@@ -21,3 +21,5 @@ Edit boards.h to include this board definition:
 Add junk code at the start (a random declared variable, etc)
 Disable the servo library
 Make sure SerialUSB is defined as Serial instead. 
+
+PACKAGES REQUIRED FOR NPM (since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, forever 
