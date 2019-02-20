@@ -14,9 +14,9 @@
 int cardid = 0;
 String currentCardID = String(cardid);
 //String currentStory = "story0";
-//LCD INFO (Pins and associations)
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+//LCD INFO (Pins and associations) -- now trying to control this through node 
+//const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 // If using the breakout with SPI, define the pins for SPI communication.
 #define PN532_SCK  (2)
@@ -46,9 +46,9 @@ void setup() {
 
   // initialize the serial communications:
   Serial.begin(115200);
-  Serial.println("Hello!");
+  //Serial.println("Hello!");
 
-  lcd.begin(20, 4);
+  //lcd.begin(20, 4);
   nfc.begin();
 
   uint32_t versiondata = nfc.getFirmwareVersion();
@@ -102,7 +102,7 @@ void loop() {
       currentCardID = cardid;
       //Serial.println("Trace " + currentCardID + " found.");
       Serial.println(currentCardID);
-      lcd.print(currentCardID);
+      //lcd.print(currentCardID);
     }
     //Serial.println("Analyzing trace further...");
     //Serial.println("");
