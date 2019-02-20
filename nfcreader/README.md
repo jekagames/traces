@@ -1,6 +1,7 @@
 # traces
 NFC code with node js for a narrative game about time travel
 
+#INSTALLATION INSTRUCTIONS & PITFALLS
 When installing Node, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. 
 
 In order to make this work with an Arduino M4 Metro, do the following:
@@ -22,4 +23,13 @@ Add junk code at the start (a random declared variable, etc)
 Disable the servo library
 Make sure SerialUSB is defined as Serial instead. 
 
-PACKAGES REQUIRED FOR NPM (since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, forever 
+# PACKAGES REQUIRED FOR NPM 
+(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, forever 
+
+#SETTING UP LCD SCREEN VIA SERIAL PORT BACKPACK
+Used the Pololu Serial Transmitter (https://www.pololu.com/docs/0J23) to set the EEPROM (permanent memory). Used the Adafruit LCD command guide for setup. 
+Setting the Screen size (20x4):
+0xFE 0xD1 20 4
+
+Setting the screen colour:
+"Set RGB Backlight Color - 0xFE 0xD0 - Sets the backlight to the red, green and blue component colors. The values of can range from 0 to 255 (one byte). This is saved to EEPROM. Each color R, G, and B is represented by a byte following the command. Color values range from 0 to 255 (0xFF in hex). To set the backlight to Red, the command is 0xFE 0xD0 0xFF 0x0 0x0. Blue is 0xFE 0xD0 0x0 0x0 0xFF. White is 0xFE 0xD0 0xFF 0xFF 0xFF." -- https://learn.adafruit.com/usb-plus-serial-backpack/command-reference
