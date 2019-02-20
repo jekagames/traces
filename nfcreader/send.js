@@ -1,5 +1,6 @@
 var currentStory = "Story 0";
 const SerialPort = require('serialport');
+const Lcd = require('lcd');
 //COM PORT has to be read and changed accordingly in windows from the Arduino IDE. Maybe there's a way to make the code auto-select the correct port? 
 //Or maybe this will just be easier in Linux
 const NFCport = new SerialPort('COM7', {
@@ -7,10 +8,11 @@ const NFCport = new SerialPort('COM7', {
   }
 );
 
-const screenPort = new SerialPort('COM9', {
-  baudRate: 115200
-  }
-);
+const lcd = new Lcd('COM9', {rs: 12, e: 11, data: [5, 4, 3, 2], cols: 20, rows: 4, baudRate: 115200});
+// const screenPort = new SerialPort('COM9', {
+//   baudRate: 115200
+//   }
+// );
 
 NFCport.on('data', function (data) {
   //console.log(data);
@@ -31,7 +33,7 @@ parser.on('data', function (data) {
   //console.log("");
 });
 
-screenPort.on('data', function(data) {
+lcd.on('data', function(data) {
 console.log("hello!");
 }
 )
@@ -40,6 +42,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
+var bindings = require('bindings')('binding.node')
 
 app.get('/', function(req, res)
 {

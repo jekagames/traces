@@ -1,6 +1,8 @@
 # traces
 NFC code with node js for a narrative game about time travel
 
+When installing Node, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. 
+
 In order to make this work with an Arduino M4 Metro, do the following:
 Edit boards.h to include this board definition:
 #elif defined(_VARIANT_METRO_M4_)

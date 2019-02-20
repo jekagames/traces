@@ -3,11 +3,17 @@
 	"version": "0.0.0",
 	"description": "traces - time travel project",
 	"main": "app.js",
-	"dependencies":
-	{
-		"serialport": "7.1.0",
-		"express": "latest",
-		"socket.io": "latest",
-		"createjs-soundjs": "latest"
+	"dependencies": {
+		"bindings": "^1.4.0",
+		"createjs-soundjs": "^0.6.2",
+		"epoll": "^2.0.7",
+		"express": "^4.16.4",
+		"file-uri-to-path": "^1.0.0",
+		"lcd": "^2.0.4",
+		"mutexify": "^1.2.0",
+		"node-gyp": "^3.8.0",
+		"onoff": "^3.2.7",
+		"serialport": "^7.1.4",
+		"socket.io": "^2.2.0"
 	}
 }
