@@ -1,4 +1,4 @@
-//char test;
+char test;
 
 #include <LiquidCrystal.h>
 #include <Boards.h>
@@ -12,11 +12,7 @@
 #include <Adafruit_PN532.h>
 
 int cardid = 0;
-String currentCardID = String(cardid);
-//String currentStory = "story0";
-//LCD INFO (Pins and associations) -- now trying to control this through node 
-//const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+String currentCardID = String();
 
 // If using the breakout with SPI, define the pins for SPI communication.
 #define PN532_SCK  (2)
@@ -42,13 +38,10 @@ Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 
 void setup() {
 
- // set up the LCD's number of columns and rows:
-
   // initialize the serial communications:
   Serial.begin(115200);
   //Serial.println("Hello!");
 
-  //lcd.begin(20, 4);
   nfc.begin();
 
   uint32_t versiondata = nfc.getFirmwareVersion();
@@ -79,67 +72,21 @@ void loop() {
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
   
   if (success) {
-  //Hey, you need this to know what the UID is for the cards, so you'll have to switch this off and on when you need to add new cards. 
-    // Display some basic information about the card
-    //Serial.println("Found a trace...");
-    //Serial.print("  UID Length: ");Serial.print(uidLength, DEC);Serial.println(" bytes");
-    //Serial.print("  UID Value: ");
-    //nfc.PrintHex(uid, uidLength);
     
     if (uidLength == 4)
     {
       // We probably have a Mifare Classic card ... 
       uint32_t cardid = uid[0];
-      currentCardID = String(cardid);
       cardid <<= 8;
       cardid |= uid[1];
       cardid <<= 8;
       cardid |= uid[2];  
       cardid <<= 8;
       cardid |= uid[3]; 
-     //Serial.print("Analyzing trace...");
-      //Serial.println(cardid);
-      currentCardID = cardid;
+      currentCardID = String(cardid);
       //Serial.println("Trace " + currentCardID + " found.");
       Serial.println(currentCardID);
-      //lcd.print(currentCardID);
+      delay(1500);
     }
-    //Serial.println("Analyzing trace further...");
-    //Serial.println("");
-      //delay(1000);
-  }
-  }
-
-
-//if (currentCardID == "17938683") {
-  //Serial.println("Story 1");
-  //currentStory = "story 1";
-  //delay(800);
-//}  else if (currentCardID == "1635431931") {
-    //Serial.println("Story 2");
-    //currentStory = "story 2";
-   //delay(800);
-   // }  else if (currentCardID == "285915387") {
-    //Serial.println("Story 3");
-    //currentStory = "story 3";
-    //delay(800);
-    //}  else if (currentCardID == "4051744763") {
-    //Serial.println("Story 4");
-    //currentStory = "story 4";
-    //delay(800);
-    //}  else if (currentCardID == "2446767611") {
-    //Serial.println("Story 5");
-    //currentStory = "story 5";
-    //delay(800);
-   // }  else if (currentCardID == "107222141") {
-    //Serial.println("Story 6");
-    //currentStory = "story 6";
-    //delay(800);
-  //}    else {
-      //Serial.println("Our systems can't seem to analyze this trace.");
-      //currentStory = "Our systems can't seem to analyze this trace.";
-   // }
-    //delay(800);
-//}
-
-
+    }
+    }

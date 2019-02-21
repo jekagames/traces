@@ -1,49 +1,40 @@
+//Hello here's some code for Traces
 var currentStory = "";
 const SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
 
 //COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. 
+
+
 const NFCport = new SerialPort('COM7', {
   baudRate: 115200
+  } , function (){
+    const parser = NFCport.pipe(new Readline());
+    parser.on('data', function (data) {
+      console.log(typeof(data));
+      if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
+        return
+      }
+  console.log("Analyzing traces...");
+  console.log("Current Story: " + data);
+  socketNFC.emit('onCurrentStory', data);
+  //eventually this will have to be replaced with the parsed story
+screenPort.write("The current card is " + data + " ");
+  
+})
   }
 );
 
-//const lcd = new Lcd('COM9', {rs: 12, e: 11, data: [5, 4, 3, 2], cols: 20, rows: 4, baudRate: 115200});
 const screenPort = new SerialPort('COM9', {
   baudRate: 115200
   }
 );
 
-NFCport.once('data', function (data) {
-  //console.log(data);
-  //socket.emit('data', data);
-  socket.emit('data', currentStory);
-});
-
-const Readline = require('@serialport/parser-readline');
-const parser = NFCport.pipe(new Readline());
-//{ delimiter: '\n' } -- was in Readline for readability
-NFCport.pipe(parser);
-//console.log(NFCport);
-parser.on('data', function (data) {
-	console.log("Analyzing traces...");
-  console.log(data);
-  currentStory = data.trim();
-  console.log(currentStory);
-  //can I nest these?
-  screenPort.on('data', function(data) {
-  socket.emit('data');
-  currentStory = data.trim();
-})
-screenPort.write("The current card is " + currentStory + " ");
-console.log(currentStory);
-
-
-});
 
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var socket = require('socket.io')(http);
+var socketNFC = require('socket.io')(http);
 
 app.get('/', function(req, res)
 {
@@ -56,7 +47,7 @@ app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/libraries'));
 app.use(express.static(__dirname + '/assets'));
 
-socket.once('connection', function(socket)
+socketNFC.once('connection', function(socket)
 {
 	console.log('Connecting to the stream of time.');
 });

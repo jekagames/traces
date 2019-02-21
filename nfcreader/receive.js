@@ -2,21 +2,27 @@
 var receivedSound;
 var receivedTextCue;
 var soundInstance;
+var socketNFC = io();
 
-var socket = io();
-			socket.on('data', function(data)
+			socketNFC.on('onCurrentStory', function(data)
 			{ 
-				var newStory = data.trim(); 
+				console.log("BOOOOOP");
+				// if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
+    //     return
+    //   }
+				var newStory = data; 
+				console.log(data);
+				newStory.trim();
+				console.log(newStory + " is being written to newStory");
 				if (newStory != "") 
 				{
 					receivedTextCue = newStory;
-					console.log("Text Reference" + receivedTextCue);
+					console.log("Text Reference: " + receivedTextCue);
 					
 					if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
 					{
 					receivedSound = newStory;
-					console.log("Audio Reference" + receivedSound);
-					storyTeller();
+					console.log("Audio Reference: " + receivedSound);
 					}
 				}
 			});
@@ -62,7 +68,8 @@ console.log("Searching for traces...")
 console.log(database);
 
 function getStoryLine(receivedTextCue){
-  return database[receivedTextCue.tostring()];
+	//moved .tostring() to earlier to see if it solves trimming issues 
+  return database[receivedTextCue];
   //
 }
 
