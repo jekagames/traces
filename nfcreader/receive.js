@@ -1,15 +1,16 @@
 //the receive code for telling the web page how to handle all this information
-var receivedSound;
-var receivedTextCue;
+var receivedSound = "";
+var receivedTextCue = "";
 var soundInstance;
 var socketNFC = io();
+var socketChunk = io();
 
 			socketNFC.on('onCurrentStory', function(data)
 			{ 
-				console.log("BOOOOOP");
-				// if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
-    //     return
-    //   }
+				console.log("DATA IS BEING RECEIVED THROUGH NFC SOCKET");
+				if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
+        return
+      }
 				var newStory = data; 
 				console.log(data);
 				newStory.trim();
@@ -18,11 +19,14 @@ var socketNFC = io();
 				{
 					receivedTextCue = newStory;
 					console.log("Text Reference: " + receivedTextCue);
+					callStoryPrint();
 					
 					if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
 					{
 					receivedSound = newStory;
 					console.log("Audio Reference: " + receivedSound);
+					getStoryAudio(receivedSound);
+					storyAudio(receivedSound);
 					}
 				}
 			});
@@ -35,53 +39,77 @@ var socketNFC = io();
 //Make the spreadsheet then parse it into a json dictionary using Mr Data Converter or other service -- 
 //https://shancarter.github.io/mr-data-converter/)
 var database = {
-  "1635431931": { "title":"story001", "text":"[You can see their traces permeating the space, tying echoes of their very beings to the artefacts that they left behind, to the spaces and things that meant something to them here. Track down the artefacts and spaces, and we can analyze the traces. That's what you're here to]", "audio_filename":"log001.ogg"}
+  "scanned_item": { "tag_id": "1635431931", "title":"story001", "text":"[You can see their traces permeating the space, tying echoes of their very beings to the artefacts that they left behind, to the spaces and things that meant something to them here. Track down the artefacts and spaces, and we can analyze the traces. That's what you're here to]", "audio_file":"log001"}
 }
 
 //PLAY AUDIO
-function storyAudio() {
-if (receivedSound == "1635431931") 
-{
-//play sound log001
-soundInstance = createjs.Sound.play("log001");
-}
-else if (receivedSound == "17938683")
-{
-	//play sound log002
-soundInstance = createjs.Sound.play("log002");
+
+function getStoryAudio(receivedSound){
+	//removed .tostring() to see if it solves trimming issues 
+  return database[receivedSound];
+  //
 }
 
-else
-{
-	console.log("I can't identify this trace.");
+var testStoryAudio = getStoryAudio("scanned_item");
+console.log("TAG ID for Audio: " + testStoryAudio);
+
+function storyAudio(receivedSound) {
+
+var rawAudioID = receivedSound["audio_file"];
+  console.log("RAW AUDIO ID: " + rawAudioID);
+  var audioID = rawAudioID.split(" ");
+  console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
+
+// if (receivedSound == scanned_item.tag_id) 
+// {
+//play sound log00x
+soundInstance = createjs.Sound.play(audioID);
+console.log("Ooo sound should be playing.")
 }
 
-			}
+
+// else if (receivedSound == "17938683")
+// {
+// 	//play sound log002
+// soundInstance = createjs.Sound.play("log002");
+// }
+
+// else
+// {
+// 	console.log("I can't identify this trace.");
+// }
+
 
 //ENRIC's awesome LCD text scroller
 
 var lineMaxCharacters = 20;
 var maxRows = 4;
 var delayPerChunk = 1000;
+var chunk;
 
 console.log("Searching for traces...")
 console.log(database);
 
+function callStoryPrint() {
+
+getStoryLine(receivedTextCue);
+var currentStoryLine = getStoryLine("scanned_item");
+console.log("TAG ID for Line: " + currentStoryLine);
+processRawText(currentStoryLine);
+displayStoryNode(currentStoryLine);
+displaySingleChunk(chunk);
+}
+
 function getStoryLine(receivedTextCue){
-	//moved .tostring() to earlier to see if it solves trimming issues 
+	//removed .tostring() to see if it solves trimming issues 
   return database[receivedTextCue];
   //
 }
 
-var testStoryLine = getStoryLine();
-
-console.log(testStoryLine);
-console.log(processRawText(testStoryLine));
-displayStoryNode(testStoryLine);
-
 // this expects a node with title, and rawtext, with chunks empty
 function processRawText(receivedTextCue){
   var rawText = receivedTextCue.text;
+  console.log(rawText);
   var words = rawText.split(" ");
   var rows = [];
   var currentRow = "";
@@ -101,8 +129,8 @@ function processRawText(receivedTextCue){
     }
   }
   rows.push(currentRow.trim());
-  storyline.rows = rows;
-  return storyline;
+  receivedTextCue.rows = rows;
+  return receivedTextCue;
 }
 
 function displayStoryNode(storynode){
@@ -120,11 +148,15 @@ function displayStoryNode(storynode){
     var display = chunks[d];
     setTimeout(displaySingleChunk, delayPerChunk*(d+1), display);
 //Trying to fulfill that promise!
-setTimeout.then(console.log("Analyzing trace."), console.log("This trace is unreadable."));
+//setTimeout.then(console.log("Analyzing trace."), console.log("This trace is unreadable."));
   }
 }
 
 function displaySingleChunk(chunk){
   //instead of logging to console, emit to the serial port 
-  screenPort.write(chunk);
+  console.log(chunk);
+    socketChunk.emit('storyChunk', chunk);
+    console.log("Emitting chunks");
 }
+//   );
+// }
