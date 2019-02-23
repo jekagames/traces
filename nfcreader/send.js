@@ -4,7 +4,7 @@ const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
 var express = require('express');
 var app = express();
-var http = require('http').Server(app);
+var http = require('http').Server(app); 
 var socketNFC = require('socket.io')(http);
 var socketLCD = require('socket.io-client')(http);
 
@@ -25,13 +25,15 @@ const NFCport = new SerialPort('COM7', {
   console.log("Analyzing traces...");
   console.log("Current Story: " + data);
   socketNFC.emit('onCurrentStory', data);
-screenPort.write("Hello there, cutie");
+  socketLCD.connect('http://localhost:8080');
+//screenPort.write("Hello there, cutie");
   //eventually this will have to be replaced with the parsed story  
 })
 });
 
 socketLCD.on('storyChunk', function (chunk) 
     {
+      console.log("DEBUGGING LCD SOCKET");
       var receivedChunks = chunk;
       console.log("RECEIVING CHUNKS" + receivedChunks);
        screenPort.write(receivedChunks);
