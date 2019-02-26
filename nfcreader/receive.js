@@ -235,7 +235,7 @@ function displaySingleChunk(chunk){
 	console.log(chunk);
 //THIS MAY STILL BE BORKED
 socketChunk.on('storyChunk', (chunk) =>{
-		parser: socketParser;
+		// parser: socketParser;
      console.log("Emitting chunks");
      socketChunk.emit('storyChunk', chunk);
      console.log("Emitted Chunk: "+ chunk);
