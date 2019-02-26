@@ -1,5 +1,6 @@
 var receivedCue = "test";
 var passedCue;
+var storyLine;
 var soundInstance;
 var socketNFC = io();
 var socketChunk = io.connect('http://localhost:8080');
@@ -129,32 +130,29 @@ var database = {
       }
 				var newStory = data; 
 				console.log(data);
-				newStory.trim();
+				newStory = newStory.trim();
 				console.log(newStory + " is being written to newStory");
 
 				if (newStory != "") 
 				{
 					receivedCue = newStory;
 					console.log("Text and Audio Reference: " + receivedCue);
-					// callStoryPrint(receivedCue);
+					//THIS IS WHERE IT BORKSvvv
+					callStoryPrint(receivedCue);
 					// storyAudio(audioID);
 				}
 			});
 
-//WHEN/HOW SHOULD I CALL THESE? I wish javascript had a loop/on update function
-
-
-
 //PLAY AUDIO
 
-function getDatabase(raw_id){
-  return database[raw_id.toString()];
-  console.log("The database is being returned");
+
+function getDatabase(passedCue){
+  return database[passedCue];
   //
 }
 
 function pickLogFile(audioID){
-var rawAudioID = receivedCue.audiofile;
+var rawAudioID = storyLine.AUDIOFILE;
 console.log("RAW AUDIO ID: " + rawAudioID);
 var audioID = rawAudioID;
 console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
@@ -176,18 +174,19 @@ var chunk;
 console.log("Searching for traces...")
 console.log(database);
 
-
+//IS THIS WHERE IT BORKS???vvv
 function callStoryPrint(passedCue) {
-var passedCue = getDatabase(receivedCue);
-processRawText(receivedCue);
-displayStoryNode(storynode);
+storyLine = getDatabase(passedCue);
+console.log("Printing storyLine: " + storyLine);
+processRawText(storyLine);
+displayStoryNode(storyLine);
 displaySingleChunk(chunk);
 
 }
 
 // this expects a node with title, and rawtext, with chunks empty
-function processRawText(passedCue){
-  var rawText = passedCue.text;
+function processRawText(aStoryLine){
+  var rawText = storyLine.TEXT;
   console.log(rawText);
   var words = rawText.split(" ");
   var rows = [];
@@ -208,8 +207,8 @@ function processRawText(passedCue){
     }
   }
   rows.push(currentRow.trim());
-  receivedCue.rows = rows;
-  return receivedCue;
+  storyLine.rows = rows;
+  return storyLine;
 }
 
 function displayStoryNode(storynode){
