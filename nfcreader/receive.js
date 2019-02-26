@@ -1,6 +1,7 @@
 var receivedCue = "test";
 var passedCue;
 var storyLine;
+var soundFile;
 var soundInstance;
 var socketNFC = io();
 var socketChunk = io.connect('http://localhost:8080');
@@ -137,13 +138,11 @@ var database = {
 				{
 					receivedCue = newStory;
 					console.log("Text and Audio Reference: " + receivedCue);
-					//THIS IS WHERE IT BORKSvvv
 					callStoryPrint(receivedCue);
-					// storyAudio(audioID);
+					//THIS IS WHERE IT BORKSvvv
+					storyAudio(receivedCue);
 				}
 			});
-
-//PLAY AUDIO
 
 
 function getDatabase(passedCue){
@@ -151,18 +150,21 @@ function getDatabase(passedCue){
   //
 }
 
-function pickLogFile(audioID){
-var rawAudioID = storyLine.AUDIOFILE;
+//PLAY AUDIO
+
+function storyAudio(passedCue) {
+soundFile = getDatabase(passedCue);
+console.log("AUDIO DATABASE :" + soundFile);
+var rawAudioID = soundFile.AUDIOFILE;
 console.log("RAW AUDIO ID: " + rawAudioID);
 var audioID = rawAudioID;
 console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
-}
 
-function storyAudio(audioID) {
 if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
 soundInstance = createjs.Sound.play(audioID);
 console.log("Ooo sound should be playing.");
 }
+
 
 //ENRIC's awesome LCD text scroller
 
@@ -174,7 +176,7 @@ var chunk;
 console.log("Searching for traces...")
 console.log(database);
 
-//IS THIS WHERE IT BORKS???vvv
+
 function callStoryPrint(passedCue) {
 storyLine = getDatabase(passedCue);
 console.log("Printing storyLine: " + storyLine);
@@ -231,7 +233,7 @@ function displayStoryNode(storynode){
 //sending chunks
 function displaySingleChunk(chunk){
 	console.log(chunk);
-
+//THIS MAY STILL BE BORKED
 socketChunk.on('storyChunk', (chunk) =>{
 		parser: socketParser;
      console.log("Emitting chunks");
