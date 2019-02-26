@@ -67,7 +67,58 @@ var database = {
 
 			createjs.Sound.registerSound("log001.ogg", "log001");
 			createjs.Sound.registerSound("log002.ogg", "log002");
-
+			createjs.Sound.registerSound("log003.ogg", "log003");
+			createjs.Sound.registerSound("log004.ogg", "log004");
+			createjs.Sound.registerSound("log005.ogg", "log005");
+			createjs.Sound.registerSound("log006.ogg", "log006");
+			createjs.Sound.registerSound("log007.ogg", "log007");
+			createjs.Sound.registerSound("log008.ogg", "log008");
+			createjs.Sound.registerSound("log009.ogg", "log009");
+			createjs.Sound.registerSound("log010.ogg", "log010");
+			createjs.Sound.registerSound("log011.ogg", "log011");
+			createjs.Sound.registerSound("log012.ogg", "log012");
+			createjs.Sound.registerSound("log013.ogg", "log013");
+			createjs.Sound.registerSound("log014.ogg", "log014");
+			createjs.Sound.registerSound("log015.ogg", "log015");
+			createjs.Sound.registerSound("log016.ogg", "log016");
+			createjs.Sound.registerSound("log017.ogg", "log017");
+			createjs.Sound.registerSound("log018.ogg", "log018");
+			createjs.Sound.registerSound("log019.ogg", "log019");
+			createjs.Sound.registerSound("log020.ogg", "log020");
+			createjs.Sound.registerSound("log021.ogg", "log021");
+			createjs.Sound.registerSound("log022.ogg", "log022");
+			createjs.Sound.registerSound("log023.ogg", "log023");
+			createjs.Sound.registerSound("log024.ogg", "log024");
+			createjs.Sound.registerSound("log025.ogg", "log025");
+			createjs.Sound.registerSound("log026.ogg", "log026");
+			createjs.Sound.registerSound("log027.ogg", "log027");
+			createjs.Sound.registerSound("log028.ogg", "log028");
+			createjs.Sound.registerSound("log029.ogg", "log029");
+			createjs.Sound.registerSound("log030.ogg", "log030");
+			createjs.Sound.registerSound("log031.ogg", "log031");
+			createjs.Sound.registerSound("log032.ogg", "log032");
+			createjs.Sound.registerSound("log033.ogg", "log033");
+			createjs.Sound.registerSound("log034.ogg", "log034");
+			createjs.Sound.registerSound("log035.ogg", "log035");
+			createjs.Sound.registerSound("log036.ogg", "log036");
+			createjs.Sound.registerSound("log037.ogg", "log037");
+			createjs.Sound.registerSound("log038.ogg", "log038");
+			createjs.Sound.registerSound("log039.ogg", "log039");
+			createjs.Sound.registerSound("log040.ogg", "log040");
+			createjs.Sound.registerSound("log041.ogg", "log041");
+			createjs.Sound.registerSound("log042.ogg", "log042");
+			createjs.Sound.registerSound("log043.ogg", "log043");
+			createjs.Sound.registerSound("log044.ogg", "log044");
+			createjs.Sound.registerSound("log045.ogg", "log045");
+			createjs.Sound.registerSound("log046.ogg", "log046");
+			createjs.Sound.registerSound("log047.ogg", "log047");
+			createjs.Sound.registerSound("log048.ogg", "log048");
+			createjs.Sound.registerSound("log049.ogg", "log049");
+			createjs.Sound.registerSound("log050.ogg", "log050");
+			createjs.Sound.registerSound("log051.ogg", "log051");
+			createjs.Sound.registerSound("log052.ogg", "log052");
+			createjs.Sound.registerSound("log053.ogg", "log053");
+			createjs.Sound.registerSound("log054.ogg", "log054");
 
 
 			socketNFC.on('onCurrentStory', function(data)
