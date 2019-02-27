@@ -4,8 +4,8 @@ var storyLine;
 var soundFile;
 var soundInstance;
 var socketNFC = io();
-var socketChunk = io();
 var display;
+var chunk;
 
 //DATABASE TO READ STORY AND AUDIO FILE DIRECTIONS FROM
 //Managing text and audio through a spreadsheet (json dictionary)
@@ -220,7 +220,7 @@ function displayStoryNode(storynode){
   var chunks = [];
   for (i = 0; i < storynode.rows.length; i++) {
     var msg = "";
-    var chunk = storynode.rows.slice(i, i + 4);
+    chunk = storynode.rows.slice(i, i + 4);
     msg = chunk.join(" ");
     lastIndex = i+3;
     chunks.push(msg);
@@ -233,15 +233,14 @@ function displayStoryNode(storynode){
 
 //sending chunks
 function displaySingleChunk(chunk){
-	console.log(chunk);
+console.log(chunk);
+parsedChunk = chunk;
+parsedChunk = parsedChunk.toString();
+console.log("Parsed Chunk: " + parsedChunk);
+	// if (parsedChunk == undefined || parsedChunk == null){
+socketNFC.emit('storyChunk', parsedChunk);
+console.log("The single chunk should be displaying.");
+// }
+};
 
-}
 
-socketChunk.on('storyChunk', function(chunk)
-			{ 
-				console.log("we're in the SocketChunk function");
-				if (data == undefined || data == null){
-console.log("data emitted to socket: " + chunk);
-socketChunk.emit('sendChunk', 'testchunk');
-}
-});

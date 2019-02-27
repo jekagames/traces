@@ -6,19 +6,11 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app); 
 var socketNFC = require('socket.io')(http);
-var socketLCD = require('socket.io')(http);
-
-  //var socketLCD = require('socket.io-client')(http);
 
 //COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. 
 const screenPort = new SerialPort('COM9', {
   baudRate: 115200 
-  }, function () {
-  socketLCD.on('storyChunk', function(chunk) {
-console.log("Received Chunks: " + chunk);
-screenPort.write(chunk);
-    })
-});
+  });
 
 const NFCport = new SerialPort('COM7', {
   baudRate: 115200
@@ -32,11 +24,17 @@ const NFCport = new SerialPort('COM7', {
   console.log("Analyzing traces...");
   console.log("Current Story: " + data);
   socketNFC.emit('onCurrentStory', data);
-  // socketLCD.connect('http://localhost:8080');
-//screenPort.write("Hello there, cutie");
-  //eventually this will have to be replaced with the parsed story  
+//});
+
+socketNFC.on('storyChunk', function(parsedChunk) {
+  console.log("Data is being received for parsedChunk");
+  var lcdText = parsedChunk;
+  lcdText = lcdText.toString();
+console.log("Received Chunks: " + lcdText);
+screenPort.write("TEST CHUNK: " + lcdText);
+})    
 })
-});
+  });
 
 app.get('/', function(req, res)
 {
@@ -55,5 +53,5 @@ socketNFC.on('connection', function(socket)
 http.listen(8080, function()
 {
 
-	console.log('Open localhost:8080 in your web browser!');
+	console.log('Open localhost:8080 in your web browser!')
 });
