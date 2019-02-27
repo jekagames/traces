@@ -125,6 +125,7 @@ var database = {
 
 			socketNFC.on('onCurrentStory', function(data)
 			{ 
+				if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED)){
 				console.log("DATA IS BEING RECEIVED THROUGH NFC SOCKET");
 
 				if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
@@ -133,16 +134,15 @@ var database = {
 				var newStory = data; 
 				console.log(data);
 				newStory = newStory.trim();
-				// console.log(newStory + " is being written to newStory");
 
 				if (newStory != "") 
 				{
 					receivedCue = newStory;
 					console.log("Text and Audio Reference: " + receivedCue);
 					callStoryPrint(receivedCue);
-					//THIS IS WHERE IT BORKSvvv
 					storyAudio(receivedCue);
 				}
+			}
 			});
 
 
@@ -161,7 +161,7 @@ var rawAudioID = soundFile.AUDIOFILE;
 var audioID = rawAudioID;
 // console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
 
-if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
+//if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
 soundInstance = createjs.Sound.play(audioID);
 console.log("Ooo sound should be playing.");
 }
@@ -169,9 +169,9 @@ console.log("Ooo sound should be playing.");
 
 //ENRIC's awesome LCD text scroller
 
-var lineMaxCharacters = 20;
+var lineMaxCharacters = 19;
 var maxRows = 4;
-var delayPerChunk = 1000;
+var delayPerChunk = 2000;
 var chunk;
 
 console.log("Searching for traces...")
@@ -179,18 +179,15 @@ console.log(database);
 
 
 function callStoryPrint(passedCue) {
+	//if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED)){
 storyLine = getDatabase(passedCue);
-// console.log("Printing storyLine: " + storyLine);
 processRawText(storyLine);
 displayStoryNode(storyLine);
-//displaySingleChunk(chunk);
-
 }
 
 // this expects a node with title, and rawtext, with chunks empty
 function processRawText(aStoryLine){
-  var rawText = storyLine.TEXT;
-  // console.log(rawText);
+  var rawText = aStoryLine.TEXT;
   var words = rawText.split(" ");
   var rows = [];
   var currentRow = "";
@@ -201,7 +198,8 @@ function processRawText(aStoryLine){
     if(currentRow.length + words[i].length > lineMaxCharacters){
       // we need to split
       // add current row to array
-      rows.push(currentRow.trim());
+      currentRow = currentRow.trim();
+      rows.push(currentRow.substring(0, lineMaxCharacters));
       // create a new row
       currentRow = words[i] + " ";
     }
@@ -209,26 +207,36 @@ function processRawText(aStoryLine){
       currentRow += words[i] + " ";
     }
   }
-  rows.push(currentRow.trim());
-  storyLine.rows = rows;
-  return storyLine;
+  // currentRow += "\r";
+  currentRow = currentRow.trim();
+      rows.push(currentRow.substring(0, lineMaxCharacters));
+  aStoryLine.rows = rows;
+  return aStoryLine;
 }
 
 function displayStoryNode(storynode){
   // sends the text to serialport 4 rowas at a time
   var lastIndex =-1;
+  var i = 0;
   var chunks = [];
   for (i = 0; i < storynode.rows.length; i++) {
     var msg = "";
-    chunk = storynode.rows.slice(i, i + 4);
-    msg = chunk.join(" ");
-    lastIndex = i+3;
-    chunks.push(msg);
+    chunk = "\r" + storynode.rows[i];
+     setTimeout(displaySingleChunk, delayPerChunk*(i+1), chunk);
+    //.slice(i, i + 4);
+  //   msg = chunk.join("\r");
+  //   lastIndex = i+3;
+  //   chunks.push(msg);
+  // }
+  // for (d = 0; d < chunks.length; d++){
+  //   display = chunks[d];
+  //   display = display.substring(0, display.length - 1);
+  //   setTimeout(displaySingleChunk, delayPerChunk*(d+1), display);
   }
-  for (d = 0; d < chunks.length; d++){
-    display = chunks[d];
-    setTimeout(displaySingleChunk, delayPerChunk*(d+1), display);
-  }
+  setTimeout(displaySingleChunk, delayPerChunk*(i+1), "\r");
+  setTimeout(displaySingleChunk, delayPerChunk*(i+2), "\r");
+  setTimeout(displaySingleChunk, delayPerChunk*(i+3), "\r");
+  setTimeout(displaySingleChunk, delayPerChunk*(i+4), "\r");
 }
 
 //sending chunks
@@ -239,7 +247,6 @@ parsedChunk = parsedChunk.toString();
 console.log("Parsed Chunk: " + parsedChunk);
 socketNFC.emit('storyChunk', parsedChunk);
 console.log("The single chunk should be displaying.");
-// })
 };
 
 

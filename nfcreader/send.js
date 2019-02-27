@@ -31,6 +31,7 @@ const NFCport = new SerialPort('COM7', {
 socketNFC.on('connection', function(communications)
 {
   console.log('Connecting to the stream of time.');
+  screenPort.write("\r\r\r\r");
   communications.on('storyChunk', function(parsedChunk) {
 // screenPort.write("Data is being received for parsedChunk");
 //console.log("Data is being received for parsedChunk");
