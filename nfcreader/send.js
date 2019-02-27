@@ -24,17 +24,28 @@ const NFCport = new SerialPort('COM7', {
   console.log("Analyzing traces...");
   console.log("Current Story: " + data);
   socketNFC.emit('onCurrentStory', data);
-//});
-
-socketNFC.on('storyChunk', function(parsedChunk) {
-  console.log("Data is being received for parsedChunk");
-  var lcdText = parsedChunk;
-  lcdText = lcdText.toString();
-console.log("Received Chunks: " + lcdText);
-screenPort.write("TEST CHUNK: " + lcdText);
-})    
+//});    
 })
   });
+
+socketNFC.on('connection', function(communications)
+{
+  console.log('Connecting to the stream of time.');
+  communications.on('storyChunk', function(parsedChunk) {
+// screenPort.write("Data is being received for parsedChunk");
+//console.log("Data is being received for parsedChunk");
+var lcdText = parsedChunk;
+lcdText = lcdText.toString();
+console.log("Received Chunks: " + lcdText);
+screenPort.write(lcdText);
+})
+});
+
+//seems like this code is most definitely the problem
+
+
+
+//Everything here is working fine
 
 app.get('/', function(req, res)
 {
@@ -44,11 +55,6 @@ app.get('/', function(req, res)
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/libraries'));
 app.use(express.static(__dirname + '/assets'));
-
-socketNFC.on('connection', function(socket)
-{
-	console.log('Connecting to the stream of time.');
-});
 
 http.listen(8080, function()
 {

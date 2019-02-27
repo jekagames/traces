@@ -183,7 +183,7 @@ storyLine = getDatabase(passedCue);
 // console.log("Printing storyLine: " + storyLine);
 processRawText(storyLine);
 displayStoryNode(storyLine);
-displaySingleChunk(chunk);
+//displaySingleChunk(chunk);
 
 }
 
@@ -237,10 +237,9 @@ console.log(chunk);
 parsedChunk = chunk;
 parsedChunk = parsedChunk.toString();
 console.log("Parsed Chunk: " + parsedChunk);
-	// if (parsedChunk == undefined || parsedChunk == null){
 socketNFC.emit('storyChunk', parsedChunk);
 console.log("The single chunk should be displaying.");
-// }
+// })
 };
 
 
