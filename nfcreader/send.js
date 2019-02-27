@@ -6,7 +6,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app); 
 var socketNFC = require('socket.io')(http);
-var socketLCD = require('socket.io-client')(http);
+// var socketLCD = require('socket.io-client')(http);
 
 //COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. 
 const screenPort = new SerialPort('COM9', {
@@ -25,20 +25,19 @@ const NFCport = new SerialPort('COM7', {
   console.log("Analyzing traces...");
   console.log("Current Story: " + data);
   socketNFC.emit('onCurrentStory', data);
-  socketLCD.connect('http://localhost:8080');
+  // socketLCD.connect('http://localhost:8080');
 //screenPort.write("Hello there, cutie");
   //eventually this will have to be replaced with the parsed story  
 })
 });
 
-socketLCD.on('storyChunk', function (chunk) 
-    {
-      console.log("DEBUGGING LCD SOCKET");
-      var receivedChunks = chunk;
-      console.log("RECEIVING CHUNKS" + receivedChunks);
-       screenPort.write(receivedChunks);
-       console.log("Now we're chunking!");
-    }); 
+socketNFC.on('connection', function(socketNFC){
+    // Receive ehlo event with data:
+    socketNFC.on('storyChunk', function(chunk) {
+      console.log("Received Chunks: " + chunk);
+       screenPort.write(chunk);
+    });
+});
 
 
 app.get('/', function(req, res)
@@ -50,7 +49,7 @@ app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/libraries'));
 app.use(express.static(__dirname + '/assets'));
 
-socketNFC.once('connection', function(socket)
+socketNFC.on('connection', function(socket)
 {
 	console.log('Connecting to the stream of time.');
 });

@@ -1,0 +1,21 @@
+CREDITS 
+Designed, Written and Created by Jess Rowan Marcotte
+
+VOICE ACTING
+System Voice - Natural Reader (modified)
+The Handler - Jess Rowan Marcotte
+Object 10 - Ash Cheshire
+Object 09 - Thomas Deliva
+Object 01 - Gina Hara
+Object 05 - Enric Llagostera
+Object 02, 08 - Jordan McRae
+Object 03, 04, 06 - Lukas Rowland
+Object 07 - Dietrich Squinkifer
+
+
+SPECIAL THANKS TO
+Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.
+
+
+
+

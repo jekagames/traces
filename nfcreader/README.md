@@ -1,5 +1,23 @@
-# traces
-NFC code with node js for a narrative game about time travel
+#T R A C E S
+A game about trans time travelers coming to a present much like our own, and leaving traces of their time there in the places that meant something to them. 
+
+#CREDITS 
+Designed, Written and Created by Jess Rowan Marcotte
+
+#VOICE ACTING
+System Voice - Natural Reader (modified)
+The Handler - Jess Rowan Marcotte
+Object 10 - Ash Cheshire
+Object 09 - Thomas Deliva
+Object 01 - Gina Hara
+Object 05 - Enric Llagostera
+Object 02, 08 - Jordan McRae
+Object 03, 04, 06 - Lukas Rowland
+Object 07 - Dietrich Squinkifer
+
+
+#SPECIAL THANKS TO
+Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.
 
 #INSTALLATION INSTRUCTIONS & PITFALLS
 When installing Node, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. 

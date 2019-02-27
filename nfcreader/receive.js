@@ -1,10 +1,12 @@
-var receivedCue = "test";
+var receivedCue;
 var passedCue;
 var storyLine;
 var soundFile;
 var soundInstance;
 var socketNFC = io();
-var socketChunk = io.connect('http://localhost:8080');
+var display;
+
+// var socketChunk = io.connect('http://localhost:8080');
 
 //DATABASE TO READ STORY AND AUDIO FILE DIRECTIONS FROM
 //Managing text and audio through a spreadsheet (json dictionary)
@@ -122,17 +124,18 @@ var database = {
 			createjs.Sound.registerSound("log053.ogg", "log053");
 			createjs.Sound.registerSound("log054.ogg", "log054");
 
-
 			socketNFC.on('onCurrentStory', function(data)
 			{ 
+				socketNFC.emit('storyChunk', chunk);
 				console.log("DATA IS BEING RECEIVED THROUGH NFC SOCKET");
+				
 				if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
         return
       }
 				var newStory = data; 
 				console.log(data);
 				newStory = newStory.trim();
-				console.log(newStory + " is being written to newStory");
+				// console.log(newStory + " is being written to newStory");
 
 				if (newStory != "") 
 				{
@@ -154,11 +157,11 @@ function getDatabase(passedCue){
 
 function storyAudio(passedCue) {
 soundFile = getDatabase(passedCue);
-console.log("AUDIO DATABASE :" + soundFile);
+// console.log("AUDIO DATABASE :" + soundFile);
 var rawAudioID = soundFile.AUDIOFILE;
-console.log("RAW AUDIO ID: " + rawAudioID);
+// console.log("RAW AUDIO ID: " + rawAudioID);
 var audioID = rawAudioID;
-console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
+// console.log("THIS IS THE PROCESSED AUDIO ID: " + audioID);
 
 if (!(soundInstance && soundInstance.playState != createjs.Sound.PLAY_FINISHED))
 soundInstance = createjs.Sound.play(audioID);
@@ -179,7 +182,7 @@ console.log(database);
 
 function callStoryPrint(passedCue) {
 storyLine = getDatabase(passedCue);
-console.log("Printing storyLine: " + storyLine);
+// console.log("Printing storyLine: " + storyLine);
 processRawText(storyLine);
 displayStoryNode(storyLine);
 displaySingleChunk(chunk);
@@ -189,7 +192,7 @@ displaySingleChunk(chunk);
 // this expects a node with title, and rawtext, with chunks empty
 function processRawText(aStoryLine){
   var rawText = storyLine.TEXT;
-  console.log(rawText);
+  // console.log(rawText);
   var words = rawText.split(" ");
   var rows = [];
   var currentRow = "";
@@ -225,7 +228,7 @@ function displayStoryNode(storynode){
     chunks.push(msg);
   }
   for (d = 0; d < chunks.length; d++){
-    var display = chunks[d];
+    display = chunks[d];
     setTimeout(displaySingleChunk, delayPerChunk*(d+1), display);
   }
 }
@@ -233,11 +236,5 @@ function displayStoryNode(storynode){
 //sending chunks
 function displaySingleChunk(chunk){
 	console.log(chunk);
-//THIS MAY STILL BE BORKED
-socketChunk.on('storyChunk', (chunk) =>{
-		// parser: socketParser;
-     console.log("Emitting chunks");
-     socketChunk.emit('storyChunk', chunk);
-     console.log("Emitted Chunk: "+ chunk);
-});
+
 }
