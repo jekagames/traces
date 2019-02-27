@@ -6,12 +6,19 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app); 
 var socketNFC = require('socket.io')(http);
-// var socketLCD = require('socket.io-client')(http);
+var socketLCD = require('socket.io')(http);
+
+  //var socketLCD = require('socket.io-client')(http);
 
 //COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. 
 const screenPort = new SerialPort('COM9', {
   baudRate: 115200 
-  });
+  }, function () {
+  socketLCD.on('storyChunk', function(chunk) {
+console.log("Received Chunks: " + chunk);
+screenPort.write(chunk);
+    })
+});
 
 const NFCport = new SerialPort('COM7', {
   baudRate: 115200
@@ -30,15 +37,6 @@ const NFCport = new SerialPort('COM7', {
   //eventually this will have to be replaced with the parsed story  
 })
 });
-
-socketNFC.on('connection', function(socketNFC){
-    // Receive ehlo event with data:
-    socketNFC.on('storyChunk', function(chunk) {
-      console.log("Received Chunks: " + chunk);
-       screenPort.write(chunk);
-    });
-});
-
 
 app.get('/', function(req, res)
 {

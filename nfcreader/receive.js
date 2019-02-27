@@ -4,9 +4,8 @@ var storyLine;
 var soundFile;
 var soundInstance;
 var socketNFC = io();
+var socketChunk = io();
 var display;
-
-// var socketChunk = io.connect('http://localhost:8080');
 
 //DATABASE TO READ STORY AND AUDIO FILE DIRECTIONS FROM
 //Managing text and audio through a spreadsheet (json dictionary)
@@ -126,9 +125,8 @@ var database = {
 
 			socketNFC.on('onCurrentStory', function(data)
 			{ 
-				socketNFC.emit('storyChunk', chunk);
 				console.log("DATA IS BEING RECEIVED THROUGH NFC SOCKET");
-				
+
 				if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
         return
       }
@@ -238,3 +236,12 @@ function displaySingleChunk(chunk){
 	console.log(chunk);
 
 }
+
+socketChunk.on('storyChunk', function(chunk)
+			{ 
+				console.log("we're in the SocketChunk function");
+				if (data == undefined || data == null){
+console.log("data emitted to socket: " + chunk);
+socketChunk.emit('sendChunk', 'testchunk');
+}
+});
