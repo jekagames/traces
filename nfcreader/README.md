@@ -42,7 +42,10 @@ Disable the servo library
 Make sure SerialUSB is defined as Serial instead. 
 
 # PACKAGES REQUIRED FOR NPM 
-(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, PM2 (replaces forever)
+Remember to install your own NPM packages in the game folder instead of using the Windows ones that are already there!
+
+(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd 
+(all other dependencies should auto-install)
 
 #SETTING UP LCD SCREEN VIA SERIAL PORT BACKPACK
 Used the Pololu Serial Transmitter (https://www.pololu.com/docs/0J23) to set the EEPROM (permanent memory). Used the Adafruit LCD command guide for setup. 

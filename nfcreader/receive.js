@@ -1,3 +1,4 @@
+var newStory;
 var receivedCue;
 var passedCue;
 var storyLine;
@@ -131,20 +132,24 @@ var database = {
 				if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
         return
       }
-				var newStory = data; 
+				newStory = data; 
 				console.log(data);
 				newStory = newStory.trim();
+				callEverything(newStory);
+				}
+			});
 
-				if (newStory != "") 
+
+
+function callEverything(data){
+if (newStory != "") 
 				{
 					receivedCue = newStory;
 					console.log("Text and Audio Reference: " + receivedCue);
 					callStoryPrint(receivedCue);
 					storyAudio(receivedCue);
 				}
-			}
-			});
-
+			};
 
 function getDatabase(passedCue){
   return database[passedCue];
