@@ -42,7 +42,7 @@ Disable the servo library
 Make sure SerialUSB is defined as Serial instead. 
 
 # PACKAGES REQUIRED FOR NPM 
-(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, forever 
+(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, bindings, onoff, mutexify, file-uri-to-path, epoll, lodash.debounce, forever, PM2
 
 #SETTING UP LCD SCREEN VIA SERIAL PORT BACKPACK
 Used the Pololu Serial Transmitter (https://www.pololu.com/docs/0J23) to set the EEPROM (permanent memory). Used the Adafruit LCD command guide for setup. 
@@ -65,6 +65,10 @@ Setting the screen colour:
 4. Then, change directories to whichever folder you are running the program from. 
 5. Send command "node send.js"
 6. Open localhost:8080 in your browser
+
+#SOUND
+Set the Pi to use the headphone jack instead of the HMDI connection for audio by entering:
+"amixer cset numid=3 1" 
 
 #SETTING UP "FOREVER" and HEADLESS MODE SO THAT THE PI BOOTS UP THE PROGRAM ON START
 ...I'm working on writing this part.
