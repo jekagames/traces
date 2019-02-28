@@ -59,6 +59,5 @@ app.use(express.static(__dirname + '/assets'));
 
 http.listen(8080, function()
 {
-
 	console.log('Open localhost:8080 in your web browser!')
 });

@@ -67,33 +67,16 @@ Setting the screen colour:
 6. Open localhost:8080 in your browser
 
 #SOUND
-Set the Pi to use the headphone jack instead of the HMDI connection for audio by entering:
+1. Set the Pi to use the headphone jack instead of the HMDI connection for audio by entering:
 "amixer cset numid=3 1" 
 
-May still be some chromium issues with sound, or just issues with sound generally.
+2. Use Iceweasel (Firefox) browser! 
 
-#SETTING UP "PM2" and HEADLESS MODE SO THAT THE PI BOOTS UP THE PROGRAM ON START
-There are issues with the program running once and not continuing to listen/not responding after the first tag on a pi. 
+3. 
 
-...I'm working on writing this part.
-https://pm2.io/doc/en/runtime/quick-start/
+#GET ICEWEASEL TO START ON BOOTUP ON THE PI
 
-1. "sudo npm install -g pm2" 
-2. "pm2 completion install"
-3. pm2 start path/to/file/send.js
-4. Set up a startup hook:
--- "detect available init systems on your machine and generate a configuration, use":
-"pm2 startup"
-$ [PM2] You have to run this command as root. Execute the following command:
-Copy paste this result and run it: $ sudo su -c "env PATH=$PATH:/home/unitech/.nvm/versions/node/v4.3/bin pm2 startup <distribution> -u <user> --hp <home-path>
-
---The startup hook auto loads the process list that you have previously saved.
-
-4. Save your process list with:
-
-"pm2 save"
-
-#GET CHROMIUM TO START ON BOOTUP ON THE PI
+#LAUNCHING NODE SERVER AND "SEND.JS" ON STARTUP
 
 
 
