@@ -14,39 +14,30 @@ const screenPort = new SerialPort('COM9', {
 
 const NFCport = new SerialPort('COM7', {
   baudRate: 115200
-  } , function (){
-    const parser = NFCport.pipe(new Readline());
-    parser.on('data', function (data) {
-      console.log(typeof(data));
-      if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
+  });
+
+const parser = NFCport.pipe(new Readline());
+parser.on('data', function (data) {
+console.log(typeof(data));
+if (data == "" || data == undefined || data == " " || data == null || isNaN(data)){
         return
       }
   console.log("Analyzing traces...");
   console.log("Current Story: " + data);
-  socketNFC.emit('onCurrentStory', data);
-//});    
-})
-  });
+  socketNFC.emit('onCurrentStory', data);   
+});
 
 socketNFC.on('connection', function(communications)
 {
   console.log('Connecting to the stream of time.');
   screenPort.write("\r\r\r\r");
   communications.on('storyChunk', function(parsedChunk) {
-// screenPort.write("Data is being received for parsedChunk");
-//console.log("Data is being received for parsedChunk");
 var lcdText = parsedChunk;
 lcdText = lcdText.toString();
 console.log("Received Chunks: " + lcdText);
 screenPort.write(lcdText);
 })
 });
-
-//seems like this code is most definitely the problem
-
-
-
-//Everything here is working fine
 
 app.get('/', function(req, res)
 {
