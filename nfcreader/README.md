@@ -51,3 +51,20 @@ Setting the Screen size (20x4):
 
 Setting the screen colour:
 "Set RGB Backlight Color - 0xFE 0xD0 - Sets the backlight to the red, green and blue component colors. The values of can range from 0 to 255 (one byte). This is saved to EEPROM. Each color R, G, and B is represented by a byte following the command. Color values range from 0 to 255 (0xFF in hex). To set the backlight to Red, the command is 0xFE 0xD0 0xFF 0x0 0x0. Blue is 0xFE 0xD0 0x0 0x0 0xFF. White is 0xFE 0xD0 0xFF 0xFF 0xFF." -- https://learn.adafruit.com/usb-plus-serial-backpack/command-reference
+
+#RASPBERRY PI SETUP
+1. Install node and then install all required node packages to a folder (I use traces folder on the desktop).
+2. Download and extract repository to that same folder and replace the NPM packages folder with the one that you installed.
+3. Change the USB ports (COM7 and COM9) for the correct ports on the Raspberry Pi:
+-- In the console, with the NFC reader and the lcd screen unplugged, run "ls /dev/tty*"
+-- Take note of the ports.
+-- Plug in one of the devices, then run ls/dev/tty* again. 
+-- Take note of the new port -- this port corresponds to whichever device you plugged in. 
+-- Replace the port in the send.js file using the format "/dev/ttyXXXX"
+
+4. Then, change directories to whichever folder you are running the program from. 
+5. Send command "node send.js"
+6. Open localhost:8080 in your browser
+
+#SETTING UP "FOREVER" and HEADLESS MODE SO THAT THE PI BOOTS UP THE PROGRAM ON START
+...I'm working on writing this part.
