@@ -20,7 +20,7 @@ Object 07 - Dietrich Squinkifer
 Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.
 
 #INSTALLATION INSTRUCTIONS & PITFALLS
-When installing Node, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. 
+When installing Node if playing on Windows, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. 
 
 In order to make this work with an Arduino M4 Metro, do the following:
 Edit boards.h to include this board definition:
@@ -44,7 +44,7 @@ Make sure SerialUSB is defined as Serial instead.
 # PACKAGES REQUIRED FOR NPM 
 Remember to install your own NPM packages in the game folder instead of using the Windows ones that are already there!
 
-(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd 
+(since the package.json file is practically unreadable): serialport, socket.io, createjs-soundjs, express, lcd, forever 
 (all other dependencies should auto-install)
 
 #SETTING UP LCD SCREEN VIA SERIAL PORT BACKPACK
@@ -75,11 +75,20 @@ Setting the screen colour:
 
 2. Use Iceweasel (Firefox) browser! 
 
-3. 
-
 #GET ICEWEASEL TO START ON BOOTUP ON THE PI
+Go to /etc/xdg/lxsession/LXDE/autostart 
+Edit autostart and add this line:
+@sleep 5
+@firefox-esr --start-fullscreen --start-maximized http://localhost:8080
+Disable the screensaver with a "#".
 
-#LAUNCHING NODE SERVER AND "SEND.JS" ON STARTUP
+#DISABLE RESUME FROM CRASH
+1. In the Location bar, type about:config and press Enter.
+2. The about:config "This might void your warranty!" warning page may appear. Click I'll be careful, I promise! to continue to the about:config page.
+3. In the Search box at the top, type browser.sessionstore.resume_from_crash.
+4. In the resulting grid, double-click on browser.sessionstore.resume_from_crash to set it to false.
 
+#LAUNCHING NODE SERVER AND "SEND.JS" ON STARTUP/etc/rc.local:
 
+It seems like maybe following a tutorial for getting a discord bot to work on a raspberry pi may be solution. narF has graciously offered to help over the weekend.
 
