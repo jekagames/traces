@@ -15,6 +15,10 @@ Object 02, 08 - Jordan McRae
 Object 03, 04, 06 - Lukas Rowland
 Object 07 - Dietrich Squinkifer
 
+#3D-PRINTED OBJECTS
+Jess Marcotte (20x4 LCD cover)
+brandroid64 (Brandon Bowles) (Customizable Raspberry Pi 3 (A+/B+) Case)
+djminnesota (Dan Johnson) (Arduino Uno Case)
 
 #SPECIAL THANKS TO
 Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.
@@ -88,7 +92,16 @@ Disable the screensaver with a "#".
 3. In the Search box at the top, type browser.sessionstore.resume_from_crash.
 4. In the resulting grid, double-click on browser.sessionstore.resume_from_crash to set it to false.
 
-#LAUNCHING NODE SERVER AND "SEND.JS" ON STARTUP/etc/rc.local:
+#LAUNCHING NODE SERVER AND "SEND.JS" ON REBOOT
+https://medium.com/@andrew.nease.code/set-up-a-self-booting-node-js-eb56ebd05549
 
-It seems like maybe following a tutorial for getting a discord bot to work on a raspberry pi may be solution. narF has graciously offered to help over the weekend.
+1. Install PM2 globally. ("npm install -g pm2")
+2. Execute "pm2 startup" and paste the resulting code in
+3. Navigate to your file folder and use the command "pm2 start filename.js"
+4. Execute "pm2 startup" again and paste the resulting code
+5. "pm2 start filename.js" -- it should say that it can't re-execute it.
+6. "pm2 save"
+7. Reboot to test.
+
+
 
