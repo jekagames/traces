@@ -80,7 +80,8 @@ Setting the screen colour:<br>
 2. Use Iceweasel (Firefox) browser! 
 
 # GET ICEWEASEL TO START ON BOOTUP ON THE PI 
-Go to /etc/xdg/lxsession/LXDE/autostart 
+Go to 
+ /home/pi/.config/lxsession/LXDE-pi/autostart 
 Edit autostart and add this line:
 @sleep 5
 @firefox-esr --start-fullscreen --start-maximized http://localhost:8080
