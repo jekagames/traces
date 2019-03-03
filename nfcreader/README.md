@@ -16,9 +16,9 @@ Object 03, 04, 06 - Lukas Rowland<br>
 Object 07 - Dietrich Squinkifer<br>
 
 # 3D-PRINTED OBJECTS
-Jess Marcotte (20x4 LCD cover)<br>
+Jess Marcotte (20x4 LCD cover, Arduino Uno Case top)<br>
 brandroid64 (Brandon Bowles) (Customizable Raspberry Pi 3 (A+/B+) Case)<br>
-djminnesota (Dan Johnson) (Arduino Uno Case)<br>
+djminnesota (Dan Johnson) (Arduino Uno Case bottom, modified by Jess Marcotte)<br>
 
 # SPECIAL THANKS TO
 Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.<br><br>
