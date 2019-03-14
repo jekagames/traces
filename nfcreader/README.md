@@ -18,10 +18,11 @@ Object 07 - Dietrich Squinkifer<br>
 # 3D-PRINTED OBJECTS
 Jess Marcotte (20x4 LCD cover, Arduino Uno Case top)<br>
 brandroid64 (Brandon Bowles) (Customizable Raspberry Pi 3 (A+/B+) Case)<br>
-djminnesota (Dan Johnson) (Arduino Uno Case bottom, modified by Jess Marcotte)<br>
+djminnesota (Dan Johnson) (Arduino Uno Case bottom, heavily modified by Jess Marcotte)<br>
 
 # SPECIAL THANKS TO
 Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.<br><br>
+Thomas Deliva for helping me talk through design issues and his Home Depot hardware expertise. 
 
 # INSTALLATION INSTRUCTIONS & PITFALLS
 When installing Node if playing on Windows, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. <br><br>
