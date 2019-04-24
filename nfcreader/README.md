@@ -7,13 +7,17 @@ Designed, Written and Created by Jess Rowan Marcotte<br>
 # VOICE ACTING
 System Voice - Natural Reader (modified)<br>
 The Handler - Jess Rowan Marcotte<br>
-Object 10 - Ash Cheshire<br>
-Object 09 - Thomas Deliva<br>
 Object 01 - Gina Hara<br>
-Object 05 - Enric Llagostera<br>
-Object 02, 08 - Jordan McRae<br>
+Object 02 - Dietrich Squinkifer<br> 
 Object 03, 04, 06 - Lukas Rowland<br>
-Object 07 - Dietrich Squinkifer<br>
+Object 05 - Drew Pascoe<br>
+Object 07 - Ida Toft<br>
+Object 08 - Jordan McRae<br>
+Object 09 - Thomas Deliva<br>
+Object 10 - Ash Cheshire<br>
+<br><br>
+
+With thanks to Enric Llagostera for recording an earlier version of Object 05!<br> 
 
 # 3D-PRINTED OBJECTS
 Jess Marcotte (20x4 LCD cover, Arduino Uno Case top)<br>
@@ -86,7 +90,7 @@ Go to
 Edit autostart and add this line:
 @sleep 5
 @firefox-esr --start-fullscreen --start-maximized http://localhost:8080
-Disable the screensaver with a "#".
+//Disable the screensaver with a "#".
 
 # DISABLE RESUME FROM CRASH 
 1. In the Location bar, type about:config and press Enter.
