@@ -8,11 +8,14 @@ var http = require('http').Server(app);
 var socketNFC = require('socket.io')(http);
 
 //COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. For Raspberry Pis, it's ls /dev/tty* in the console.  
-const screenPort = new SerialPort('COM9', {
+//'COM9' in WINDOWS, '/dev/ttyACM1' on Raspberry Pi
+
+const screenPort = new SerialPort('/dev/ttyACM1', {
   baudRate: 115200 
   });
 
-const NFCport = new SerialPort('COM7', {
+//'COM7' in WINDOWS, '/dev/ttyACM0' on Raspberry Pi
+const NFCport = new SerialPort('/dev/ttyACM0', {
   baudRate: 115200
   });
 
