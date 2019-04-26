@@ -7,7 +7,7 @@ var app = express();
 var http = require('http').Server(app); 
 var socketNFC = require('socket.io')(http);
 
-//COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. 
+//COM PORT has to be read and changed accordingly in windows. It can be read in the Arduino IDE. For Raspberry Pis, it's ls /dev/tty* in the console.  
 const screenPort = new SerialPort('COM9', {
   baudRate: 115200 
   });

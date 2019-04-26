@@ -26,7 +26,7 @@ djminnesota (Dan Johnson) (Arduino Uno Case bottom, heavily modified by Jess Mar
 
 # SPECIAL THANKS TO
 Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.<br><br>
-Thomas Deliva for helping me talk through design issues and his Home Depot hardware expertise. 
+Thomas Deliva for helping me talk through design issues and his Home Depot hardware expertise, for helping me to fold and pin hems, and for his on-going love and support. 
 
 # INSTALLATION INSTRUCTIONS & PITFALLS
 When installing Node if playing on Windows, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. <br><br>
