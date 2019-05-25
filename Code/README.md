@@ -19,14 +19,33 @@ Object 10 - Ash Cheshire<br>
 
 With thanks to Enric Llagostera for recording an earlier version of Object 05!<br> 
 
+# SPECIAL THANKS TO
+Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.<br><br>
+Thomas Deliva for helping me talk through design issues and his Home Depot hardware expertise, for helping me to fold and pin hems, and for his on-going love and support. 
+
 # 3D-PRINTED OBJECTS
 Jess Marcotte (20x4 LCD cover, Arduino Uno Case top)<br>
 brandroid64 (Brandon Bowles) (Customizable Raspberry Pi 3 (A+/B+) Case)<br>
 djminnesota (Dan Johnson) (Arduino Uno Case bottom, heavily modified by Jess Marcotte)<br>
 
-# SPECIAL THANKS TO
-Enric Llagostera and Dietrich Squinkifer for their help with all of my programming questions and for helping me debug.<br><br>
-Thomas Deliva for helping me talk through design issues and his Home Depot hardware expertise, for helping me to fold and pin hems, and for his on-going love and support. 
+# HARDWARE LIST
+RFID TAGS<br>
+13.56MHz RFID/NFC Clear Tag - Classic 1K[ID:361]<br>
+
+NFC READER<br>
+Adafruit PN532 NFC/RFID Controller Shield for Arduino + Extras[ID:789] <br>
+Adafruit Metro M4 feat. Microchip ATSAMD51 -- ALTERNATIVELY, USE AN ARDUINO UNO <br>
+
+SCREEN<br>
+RGB backlight negative LCD 20x4 + extras (RGB on black) [ID:498] <br>
+Adafruit USB + Serial LCD Backpack Add-On with Cable[ID:781]<br>
+
+COMPUTER<br>
+Raspberry Pi 3 Model B+<br>
+
+HEADPHONES<br>
+Anything you like.<br>
+
 
 # INSTALLATION INSTRUCTIONS & PITFALLS
 When installing Node if playing on Windows, remember to install windows build tools (npm install --global --production windows-build-tools) as administrator as well as necessary packages. <br><br>
